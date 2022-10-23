@@ -19,7 +19,7 @@ class Author {
 
 class BookService {
     // static used so the url itself doesn't become an instance/object
-    static url = "https://6352c555d0bca53a8eb4cd0d.mockapi.io/Promineo_Tech_API/books";
+    static url = "https://6352c555d0bca53a8eb4cd0d.mockapi.io/Promineo_Tech_API/book";
 
     
     
@@ -31,15 +31,16 @@ class BookService {
     }
 
     // to Read/GET a specific book:
-    static getBook(){
-        return $.get(this.url);
-            // + `/${id}`);
+    static getBook(id){
+        return $.get(this.url + `/${id}`)
+            ;
     }
 
     // to Create/POST a book:
     // book parameter = will take instance of class Book
     static createBook(book){
         return $.post(this.url, book);
+        // code below was in Matthew's mock API powerpoint, but the code was working just the same for me with or without it.
         // console.log("createBook book:". book);
         // return $.ajax({
         //     url: this.url ,
@@ -96,7 +97,7 @@ class DOMManager {
     }
 
     // if you delete a books, the DOM will be rerendered with the updated list of existing books
-    // when I click on the delete button, console says: Uncaught ReferenceError: DOMManager is not defined at HTMLButtonElement.onclick ((index):1:1).
+    // when I click on the delete button, console says: https://6352c555d0bca53a8eb4cd0d.mockapi.io/Promineo_Tech_API/book/undefined 404 (Not Found).
     static deleteBook(id){
         BookService.deleteBook(id)
             .then(() => {
@@ -106,7 +107,7 @@ class DOMManager {
     }
 
     // when an author is added to a specific Book and info is updated, it will rerender the DOM
-    // when I click on the add button, console says: Uncaught ReferenceError: DOMManager is not defined at HTMLButtonElement.onclick ((index):1:1).
+    // when I click on the add button, nothing happens. Throughout coding, I did receive this error quite a bit: Uncaught ReferenceError: DOMManager is not defined at HTMLButtonElement.onclick ((index):1:1).
     static addAuthor(id){
         for (let book of this.books){
             if (book._id == id){
@@ -148,7 +149,7 @@ class DOMManager {
                 `<div id="${book._id}" class="card">
                     <div class="card-header">
                         <h2>${book.name}</h2>
-                        <button class="btn btn-danger" onclick="DOMManager.deletebook('${book._id}')">Delete</button>
+                        <button class="btn btn-danger" onclick="DOMManager.deleteBook('${book._id}')">Delete</button>
                     </div>
                     <div class="card-body">
                         <div class="card">
@@ -160,7 +161,7 @@ class DOMManager {
                                     <input type="text" id="${book._id}-author-genre" class="form-control" placeholder="Genre">
                                 </div>
                             </div>
-                            <button id="${book._id}-new-author" onclick="DOMManager.addAuthor('${book._id}')" class="btn btn-primary form-control">Add</button>
+                            <button id="${book._id}-new-author" onclick="DOMManager.addAuthor('${book._id}')" class="btn btn-info form-control">Add</button>
                         </div>
                     </div>
                 </div><br>`
@@ -197,3 +198,5 @@ $("#create-new-book").click(() => {
 // }));
 
 DOMManager.getAllBooks();
+
+// Maybe my MockAPI wasn't connected correctly to my code. I tried to add each variable used above (ie. name, id, author, genre) to the schema in the API.
