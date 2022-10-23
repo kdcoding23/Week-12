@@ -1,0 +1,50 @@
+/* {
+    margin: 0;
+    padding: 0;
+} */
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0 50px;
+}
+
+/* NAV */
+.navbar {
+    background-color: #cde0af;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.navbar a {
+    color: rgb(186, 3, 177);
+}
+
+.navbar a:link {
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: white;
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+/* BANNER & BANNER IMAGE */
+.banner-img {
+    margin: 20px 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fddfae;
+}
+
+.banner-img img {
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+}

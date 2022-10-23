@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" crossorigin="anonymous">
+    <!-- to fix favicon error -->
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+    <!-- NAV -->
+    <div>
+        <nav class="navbar">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">KD's Book Club</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- BANNER -->
+    <div class="container pt-3">
+        <div class="banner-img">
+            <img class="img-responsive" src="https://i.pinimg.com/564x/23/fe/83/23fe83e90a9ab67c85b034aa393ba0ff.jpg" alt="Illustration of person carrying books in a wagon.">
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <div id="new-book" class="jumbotron">
+        <h2>New Book</h2>
+        <input type="text" id="new-book-name" class="form-control"><br>
+        <button id="create-new-book" class="btn btn-primary form-control">Create</button>
+    </div>
+
+    
+    <div id="app">
+
+    </div>
+
+
+    <!-- JavaScript bundle -->
+    <script src="node_modules/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
