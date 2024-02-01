@@ -44,7 +44,7 @@ class BookService {
         // console.log("createBook book:". book);
         // return $.ajax({
         //     url: this.url ,
-        //     // + `/${book._id}`,
+        //     // + `/${book.id}`,
         //     dataType: "json",
         //     data: JSON.stringify(book),
         //     contentType: "application/json",
@@ -59,7 +59,7 @@ class BookService {
         // let newBookName = bookData.bookName;
         // console.log("updateBook")
         return $.ajax({
-            url: this.url + `/${book._id}`,
+            url: this.url + `/${book.id}`,
             dataType: "json",
             data: JSON.stringify(book),
             contentType: "application/json",
@@ -110,8 +110,8 @@ class DOMManager {
     // when I click on the add button, nothing happens. Throughout coding, I did receive this error quite a bit: Uncaught ReferenceError: DOMManager is not defined at HTMLButtonElement.onclick ((index):1:1).
     static addAuthor(id){
         for (let book of this.books){
-            if (book._id == id){
-                book.authors.push(new Author($(`#${book._id}-author-name`).val(), $(`#${book._id}-author-genre`).val()));
+            if (book.id == id){
+                book.authors.push(new Author($(`#${book.id}-author-name`).val(), $(`#${book.id}-author-genre`).val()));
                 BookService.updateBook(book)
                     .then(() => {
                         return BookService.getAllBooks();
@@ -124,9 +124,9 @@ class DOMManager {
     // to delete the correct author for the book and then rerenders the DOM
     static deleteAuthor(bookId, authorId){
         for (let book of this.books){
-            if (book._id == bookId){
+            if (book.id == bookId){
                 for (let author of book.authors){
-                    if (author._id == authorId){
+                    if (author.id == authorId){
                         book.authors.splice(book.authors.indexOf(author), 1);
                         BookService.updateBook(book)
                             .then(() => {
@@ -146,22 +146,22 @@ class DOMManager {
             // prepends makes each new entry be on the top; HTML below for when each book is created
             $("#app").prepend(
                 // cards with each book created + Delete button, then input boxes for book info + Add button
-                `<div id="${book._id}" class="card">
+                `<div id="${book.id}" class="card">
                     <div class="card-header">
                         <h2>${book.name}</h2>
-                        <button class="btn btn-danger" onclick="DOMManager.deleteBook('${book._id}')">Delete</button>
+                        <button class="btn btn-danger" onclick="DOMManager.deleteBook('${book.id}')">Delete</button>
                     </div>
                     <div class="card-body">
                         <div class="card">
                             <div class="row">
                                 <div class="col-sm">
-                                    <input type="text" id="${book._id}-author-name" class="form-control" placeholder="Author">
+                                    <input type="text" id="${book.id}-author-name" class="form-control" placeholder="Author">
                                 </div>
                                 <div class="col-sm">
-                                    <input type="text" id="${book._id}-author-genre" class="form-control" placeholder="Genre">
+                                    <input type="text" id="${book.id}-author-genre" class="form-control" placeholder="Genre">
                                 </div>
                             </div>
-                            <button id="${book._id}-new-author" onclick="DOMManager.addAuthor('${book._id}')" class="btn btn-info form-control">Add</button>
+                            <button id="${book.id}-new-author" onclick="DOMManager.addAuthor('${book.id}')" class="btn btn-info form-control">Add</button>
                         </div>
                     </div>
                 </div><br>`
@@ -172,11 +172,11 @@ class DOMManager {
             // when using code below, I kept getting a jQuery error that book.authors is not iterable and it wouldn't let me add a new book.
 
             // for (let author of book.authors){
-            //     $(`#${book._id}`).find(".card.body").append(
+            //     $(`#${book.id}`).find(".card.body").append(
             //         `<p>
-            //         <span id="name-${author._id}"><strong>Name: </strong> ${author.name}</span>
-            //         <span id="genre-${author._id}"><strong>Genre: </strong> ${author.genre}</span>
-            //         <button class="btn btn-danger" onclick="DOMManager.deleteAuthor('${book._id}'. '${author._id}')">Delete Author</button>
+            //         <span id="name-${author.id}"><strong>Name: </strong> ${author.name}</span>
+            //         <span id="genre-${author.id}"><strong>Genre: </strong> ${author.genre}</span>
+            //         <button class="btn btn-danger" onclick="DOMManager.deleteAuthor('${book.id}'. '${author.id}')">Delete Author</button>
             //         `
             //     );
             // }
